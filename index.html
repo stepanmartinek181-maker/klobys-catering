@@ -274,6 +274,17 @@
     .weekly-menu-entry p{color:var(--grey);font-size:16px;line-height:1.6;margin:12px 0 0;white-space:pre-line}
     .weekly-menu-entry .menu-period{color:var(--gold);font-size:13px;letter-spacing:.04em;margin:0 0 14px}
     .weekly-menu-entry .service-action{align-self:start;max-width:320px}
+    .menu-copy{min-width:0}
+    .menu-dishes{list-style:none;padding:0;margin:26px 0 0;max-width:820px}
+    .menu-dishes li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;padding:15px 0;border-bottom:1px solid #45494c;font-size:17px;line-height:1.5}
+    .menu-dishes .dish-number{color:var(--gold);font:italic 17px Georgia,serif}
+    .menu-dishes .dish-name{overflow-wrap:anywhere}
+    .menu-dishes .dish-price{color:var(--gold);text-align:right;overflow-wrap:anywhere;max-width:160px}
+    .menu-demo-notice{padding:18px 22px;border-left:3px solid var(--gold);background:#25282a;margin:0 0 28px;max-width:920px}
+    .menu-demo-notice strong{display:block;font-size:16px;color:var(--gold);margin-bottom:7px}
+    .menu-demo-notice p{margin:0;font-size:15px;line-height:1.6;color:var(--grey)}
+    .menu-refresh-note{font-size:13px;line-height:1.5;color:var(--grey);margin:12px 0 0}
+    .menu-downloads{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
     .menu-image{grid-column:1/-1;max-height:1100px;object-fit:contain;object-position:left;background:var(--white)}
     .menus-empty{padding:34px;border:1px solid #54585b;max-width:760px}
     .menus-empty h3{font-size:clamp(26px,3vw,36px);line-height:1.1;letter-spacing:-.03em}
@@ -305,6 +316,9 @@
       .menus-section{padding-top:30px}
       .weekly-menu-entry{grid-template-columns:minmax(0,1fr);padding:24px 0}
       .weekly-menu-entry .service-action{max-width:none}
+      .menu-dishes li{grid-template-columns:24px minmax(0,1fr);font-size:16px;gap:10px}
+      .menu-dishes .dish-price{grid-column:2;text-align:left;max-width:none}
+      .menu-downloads{align-items:stretch}
       .menus-empty{padding:26px 20px}
       .menus-view{min-height:calc(100svh - 116px)}
     }
@@ -355,7 +369,8 @@
         <div class="service-heading"><div><p class="micro">Jídelna a vývařovna</p><h2 id="menus-title" tabindex="-1">Co bude<br>k obědu?</h2></div><p class="service-description">Aktuální nabídka na jednom místě. Jídelní lístek si můžete stáhnout a při domluvě odběru nám zavolat nebo napsat.</p></div>
         <div id="weekly-menus" aria-live="polite"></div>
         <div class="service-actions"><button class="service-action" data-contact data-service="Jídelna">Zeptat se na obědy</button><a class="service-action" href="tel:+420733752513">+420 733 752 513</a></div>
-        <a class="local-menu-admin" id="local-menu-admin" href="/sprava-jidelni-listky" hidden>Správa jídelních lístků — pouze v místním náhledu</a>
+        <a class="local-menu-admin" href="sprava-jidelni-listky.html">Správa jídelních lístků</a>
+        <p class="menu-refresh-note" id="menu-refresh-note" role="status"></p>
       </section>
     </div>
     <div class="contact-view" id="contact-view" hidden>
@@ -393,41 +408,74 @@
       const part=type=>parts.find(p=>p.type===type).value;
       return `${part('year')}-${part('month')}-${part('day')}`;
     };
+    const remoteMenuAttachmentUrl=attachment=>{
+      if(typeof attachment?.url!=='string'||!/^(application\/pdf|image\/(jpeg|png|webp|\*))$/.test(attachment.type))return null;
+      try{
+        const url=new URL(attachment.url);
+        if(url.protocol!=='https:'||url.username||url.password||url.port||url.search||url.hash)return null;
+        const asset=url.hostname==='github.com'&&/^\/user-attachments\/assets\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(url.pathname);
+        const image=url.hostname==='user-images.githubusercontent.com'&&/^\/\d+\/[a-zA-Z0-9._-]+\.(png|jpe?g|webp)$/i.test(url.pathname);
+        const file=url.hostname==='github.com'&&/^\/user-attachments\/files\/[1-9]\d*\/([^/]+)$/.exec(url.pathname);
+        const validFile=file&&/^[\p{L}\p{N}][\p{L}\p{N} _().-]{0,179}\.(pdf|png|jpe?g|webp)$/iu.test(decodeURIComponent(file[1]));
+        return asset||image||validFile?url.href:null;
+      }catch{return null;}
+    };
     const renderMenus=menus=>{
       menuDownloads.splice(0).forEach(url=>URL.revokeObjectURL(url));
       menuContainer.replaceChildren();
       const today=todayInPrague();
-      const valid=menus.filter(menu=>menu.active!==false&&/^\d{4}-\d{2}-\d{2}$/.test(menu.from)&&/^\d{4}-\d{2}-\d{2}$/.test(menu.to)&&menu.to>=today).sort((a,b)=>a.from.localeCompare(b.from));
-      const current=valid.filter(menu=>menu.from<=today);
-      const upcoming=valid.filter(menu=>menu.from>today);
+      const valid=menus.filter(menu=>menu&&menu.active!==false&&/^\d{4}-\d{2}-\d{2}$/.test(menu.from)&&/^\d{4}-\d{2}-\d{2}$/.test(menu.to)&&(menu.demo===true||menu.to>=today)).sort((a,b)=>a.from.localeCompare(b.from));
+      const current=valid.filter(menu=>menu.demo!==true&&menu.from<=today);
+      const upcoming=valid.filter(menu=>menu.demo!==true&&menu.from>today);
+      const examples=valid.filter(menu=>menu.demo===true);
       const addEntry=menu=>{
         const entry=document.createElement('article');
         entry.className='weekly-menu-entry';
         const copy=document.createElement('div');
+        copy.className='menu-copy';
         const period=document.createElement('p');
         period.className='menu-period';
-        period.textContent=`${menuDate(menu.from)} – ${menuDate(menu.to)}`;
+        period.textContent=menu.demo===true?'Ukázka — není aktuální nabídka':`${menuDate(menu.from)} – ${menuDate(menu.to)}`;
         const title=document.createElement('h3');
         title.textContent=menu.title;
         copy.append(period,title);
         if(menu.notes){const note=document.createElement('p');note.textContent=menu.notes;copy.append(note);}
+        if(Array.isArray(menu.items)&&menu.items.length){
+          const dishes=document.createElement('ol');dishes.className='menu-dishes';
+          menu.items.slice(0,60).forEach((item,index)=>{
+            if(!item||typeof item.name!=='string')return;
+            const line=document.createElement('li');
+            const number=document.createElement('span');number.className='dish-number';number.textContent=String(index+1).padStart(2,'0');number.setAttribute('aria-hidden','true');
+            const name=document.createElement('span');name.className='dish-name';name.textContent=item.name;
+            line.append(number,name);
+            if(typeof item.price==='string'&&item.price){const price=document.createElement('span');price.className='dish-price';price.textContent=item.price;line.append(price);}
+            dishes.append(line);
+          });copy.append(dishes);
+        }
         entry.append(copy);
         const attachment=menu.attachment;
         const match=attachment?.dataUrl?.match(/^data:(application\/pdf|image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$/);
+        let fileUrl=null,fileType=attachment?.type;
         if(match){
           const binary=atob(match[2]);
           const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
           const url=URL.createObjectURL(new Blob([bytes],{type:match[1]}));
           menuDownloads.push(url);
+          fileUrl=url;fileType=match[1];
+        }else if(typeof attachment?.url==='string'){
+          fileUrl=remoteMenuAttachmentUrl(attachment);
+        }
+        if(fileUrl){
+          const actions=document.createElement('div');actions.className='menu-downloads';
           const download=document.createElement('a');
-          download.className='service-action primary';download.href=url;download.download=attachment.name||'jidelni-listek';
-          download.textContent=match[1]==='application/pdf'?'Stáhnout jídelní lístek (PDF)':'Stáhnout jídelní lístek';
-          entry.append(download);
-          if(match[1].startsWith('image/')){const img=document.createElement('img');img.className='menu-image';img.src=url;img.alt=menu.title;img.loading='lazy';entry.append(img);}
+          download.className='service-action primary';download.href=fileUrl;download.download=attachment.name||'jidelni-listek';
+          download.textContent=fileType==='application/pdf'?'Otevřít / stáhnout lístek (PDF)':'Otevřít / stáhnout lístek';
+          download.target='_blank';download.rel='noopener noreferrer';actions.append(download);entry.append(actions);
+          if(fileType.startsWith('image/')){const img=document.createElement('img');img.className='menu-image';img.src=fileUrl;img.alt=menu.title;img.loading='lazy';entry.append(img);}
         }
         menuContainer.append(entry);
       };
-      if(!current.length){
+      if(!current.length&&!examples.length){
         const empty=document.createElement('div');empty.className='menus-empty';
         const title=document.createElement('h3');title.textContent='Aktuální menu připravujeme.';
         const text=document.createElement('p');text.textContent='Jídelní lístek pro tento termín zatím není vložený. Pro dnešní nabídku a možnosti odběru nám napište nebo zavolejte.';
@@ -435,12 +483,29 @@
       }
       current.forEach(addEntry);
       if(upcoming.length){const heading=document.createElement('h3');heading.className='menus-upcoming';heading.textContent='Na další dny';menuContainer.append(heading);upcoming.forEach(addEntry);}
-      document.getElementById('weekly-menu-status').textContent=current.length?'Aktuální jídelní lístek je připravený. Prohlédněte si nabídku a stáhněte si ji do telefonu.':'Jídelní lístky najdete na samostatné stránce. Aktuální nabídku a možnosti odběru s vámi rádi doladíme osobně.';
+      if(examples.length){
+        const notice=document.createElement('aside');notice.className='menu-demo-notice';
+        const title=document.createElement('strong');title.textContent='Ukázka jídelního lístku';
+        const text=document.createElement('p');text.textContent='Takto může vypadat vaše menu. Jde o ilustrační nabídku, nikoli o dnešní jídelní lístek nebo závazný ceník.';
+        notice.append(title,text);menuContainer.append(notice);examples.forEach(addEntry);
+      }
+      document.getElementById('weekly-menu-status').textContent=current.length?'Aktuální jídelní lístek je připravený. Prohlédněte si nabídku a stáhněte si ji do telefonu.':(examples.length?'Podívejte se na ukázku jídelního lístku. Skutečné menu bude moci správce kdykoli doplnit.':'Jídelní lístky najdete na samostatné stránce. Aktuální nabídku a možnosti odběru s vámi rádi doladíme osobně.');
     };
     renderMenus(embeddedMenus);
-    if(['127.0.0.1','localhost'].includes(location.hostname)){
-      fetch('/api/jidelni-listky',{cache:'no-store'}).then(response=>{if(!response.ok)throw new Error('Místní správce není spuštěný');return response.json();}).then(menus=>{if(!Array.isArray(menus))return;renderMenus(menus);document.getElementById('local-menu-admin').hidden=false;}).catch(()=>{});
-    }
+    let menusLoadedAt=0,menuLoadPending=false;
+    const refreshMenus=async()=>{
+      if(location.protocol==='file:'||menuLoadPending||Date.now()-menusLoadedAt<15000)return;
+      menuLoadPending=true;
+      try{
+        const source=new URL('menus.json',location.href);source.searchParams.set('v',String(Math.floor(Date.now()/60000)));
+        const response=await fetch(source,{cache:'no-store',signal:AbortSignal.timeout(8000)});
+        if(!response.ok)throw new Error('Menu unavailable');
+        const menus=await response.json();if(!Array.isArray(menus))throw new Error('Invalid menu format');
+        renderMenus(menus);menusLoadedAt=Date.now();document.getElementById('menu-refresh-note').textContent='';
+      }catch{document.getElementById('menu-refresh-note').textContent='Novější lístky se teď nepodařilo načíst. Zobrazuje se poslední uložená verze.';}
+      finally{menuLoadPending=false;}
+    };
+    refreshMenus();
     const form=document.getElementById('inquiry-form');
     const corporateFields=document.getElementById('corporate-fields');
     const updateInquiry=()=>{
@@ -476,6 +541,7 @@
       footer.hidden=showContact||showMenus;
       document.title=showContact?'Kontakt — Klobys':(showMenus?'Jídelní lístky — Klobys':pageTitle);
       currentView=nextView;
+      if(showMenus)refreshMenus();
       if(showContact||showMenus){
         if(changed){
           window.scrollTo({top:0,behavior:'instant'});
@@ -522,6 +588,7 @@
     window.addEventListener('popstate',renderView);
     window.addEventListener('hashchange',renderView);
     renderView();
+    setInterval(()=>{if(document.visibilityState==='visible'&&currentView==='menus')refreshMenus();},60000);
     form.addEventListener('submit',event=>{
       event.preventDefault();
       if(!form.reportValidity())return;

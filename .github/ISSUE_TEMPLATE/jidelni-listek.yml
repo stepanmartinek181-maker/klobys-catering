@@ -1,0 +1,71 @@
+name: Jídelní lístek
+description: Přidejte nebo upravte nabídku, kterou návštěvníci uvidí na webu Klobys.
+title: "[Jídelní lístek] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Správa jídelních lístků Klobys**
+        Lístek se zveřejní pouze od schváleného správce. Vyplňte platnost a nabídku jídel nebo nahrajte PDF / obrázek.
+        Ukázkový lístek je na webu jasně označený a nesmí být vydáván za aktuální nabídku.
+        Po uložení proběhne automatické nasazení; může trvat několik minut.
+        Pro změnu otevřete uložený lístek a upravte jeho popis. Pro odebrání jej uzavřete tlačítkem **Close issue**.
+  - type: input
+    id: nazev
+    attributes:
+      label: Název lístku
+      placeholder: "Například: Polední nabídka — 5.–9. října"
+    validations:
+      required: true
+  - type: input
+    id: od
+    attributes:
+      label: Platnost od
+      description: "Datum ve formátu RRRR-MM-DD."
+      placeholder: "2026-10-05"
+    validations:
+      required: true
+  - type: input
+    id: do
+    attributes:
+      label: Platnost do
+      description: "Datum ve formátu RRRR-MM-DD; pro jeden den použijte stejné datum jako výše."
+      placeholder: "2026-10-09"
+    validations:
+      required: true
+  - type: dropdown
+    id: typ
+    attributes:
+      label: Typ lístku
+      options:
+        - Aktuální nabídka
+        - Ukázka — není aktuální nabídka
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: jidla
+    attributes:
+      label: Nabídka jídel
+      description: "Jedno jídlo na každý řádek. Nepovinnou cenu oddělte znakem |. Pokud nahráváte soubor, lze toto pole nechat prázdné."
+      placeholder: |
+        Název polévky | cena
+        Název hlavního jídla | cena
+    validations:
+      required: false
+  - type: upload
+    id: soubor
+    attributes:
+      label: Soubor lístku
+      description: "PDF nebo obrázek. Volitelné, pokud jste napsali nabídku jídel. Soubory ve veřejném repozitáři jsou veřejně dostupné."
+    validations:
+      required: false
+      accept: ".pdf,.png,.jpg,.jpeg,.webp"
+  - type: textarea
+    id: poznamka
+    attributes:
+      label: Poznámka
+      description: "Nepovinné: informace o výdeji, objednávání, alergenech nebo dostupnosti."
+      placeholder: "Podrobnosti pro návštěvníky…"
+    validations:
+      required: false
