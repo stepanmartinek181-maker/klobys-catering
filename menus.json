@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "github-1",
+    "title": "Ukázkový jídelní lístek",
+    "from": "2026-10-02",
+    "to": "2026-10-09",
+    "notes": "Ilustrační nabídka pro představení webu. Nejde o aktuální menu ani závazný ceník. Správce může jídla změnit nebo přiložit vlastní PDF.",
+    "items": [
+      {
+        "name": "Hovězí vývar s domácími nudlemi"
+      },
+      {
+        "name": "Kuřecí řízek, bramborová kaše"
+      },
+      {
+        "name": "Pomalu pečená vepřová krkovice, šťouchané brambory"
+      },
+      {
+        "name": "Krémové houbové rizoto, parmazán"
+      }
+    ],
+    "attachment": {
+      "name": "klobys-ukazkovy-jidelni-listek.pdf",
+      "type": "application/pdf",
+      "url": "https://github.com/user-attachments/files/32982701/klobys-ukazkovy-jidelni-listek.pdf"
+    },
+    "demo": true,
+    "active": true,
+    "issueUrl": "https://github.com/stepanmartinek181-maker/klobys-catering/issues/1",
+    "updatedAt": "2026-10-02T22:05:32.000Z"
+  }
+]
