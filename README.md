@@ -2,12 +2,18 @@
 
 Klientský náhled webu: https://stepanmartinek181-maker.github.io/klobys-catering/
 
-Statický web v souboru `index.html`, optimalizované fotografie ve složce `assets/`.
+Statický vícestránkový web, optimalizované fotografie ve složce `assets/`.
 GitHub Pages používá větev `main` a kořenovou složku `/`.
 
 Web představuje především catering a tým Klobys. Nabídka je rozdělená na
-Catering, Jídelnu, Půjčovnu a Kafe. Kontakt i jídelní lístky mají vlastní pohled
-s možností návratu na hlavní stránku. Rozvržení je přizpůsobené mobilům.
+Catering, Jídelnu, Půjčovnu a Kafe. Každá položka otevírá vlastní HTML stránku,
+nikoli sekci na úvodu. Samostatné stránky mají také Galerie, Kontakt a jídelní
+lístky. Kontakt vrací návštěvníka na stránku, odkud přišel; ostatní nabídky
+mají návrat na úvod. Rozvržení je přizpůsobené mobilům.
+
+Stránky: `index.html`, `catering.html`, `jidelna.html`, `pujcovna.html`,
+`kafe.html`, `galerie.html`, `kontakt.html` a `jidelni-listky.html`.
+Původní odkazy na sekce přesměrují na odpovídající novou stránku.
 
 Půjčovna má nabídku inventáře, mobiliáře a gastro/barového vybavení.
 Kávové karty představují Kloby’s Blend, Brazil, Columbia a Guatemala.
@@ -17,7 +23,7 @@ potvrzuje tým osobně. Novější ceny a zákaznické fotografie zatím nebyly 
 
 ## Jídelní lístky a jejich správa
 
-Veřejné lístky: https://stepanmartinek181-maker.github.io/klobys-catering/#jidelni-listky
+Veřejné lístky: https://stepanmartinek181-maker.github.io/klobys-catering/jidelni-listky.html
 
 Správa: https://stepanmartinek181-maker.github.io/klobys-catering/sprava-jidelni-listky.html
 
