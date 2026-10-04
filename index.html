@@ -253,15 +253,22 @@
     .offer-card .num{color:var(--gold);font:italic 18px Georgia,serif;margin-bottom:30px}
     .offer-card h3{font-size:clamp(27px,3vw,42px);line-height:1;letter-spacing:-.025em;overflow-wrap:anywhere}
     .offer-card p{margin:20px 0 26px;color:var(--grey);font-size:16px;line-height:1.6}
-    .offer-card>a{margin-top:auto;display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid var(--gold);color:var(--gold);font-size:13px;font-weight:700}
-    .offer-card>a:hover{text-decoration:underline;text-underline-offset:4px}
+    .offer-options{list-style:none;padding:0;margin:0 0 24px;width:100%;color:var(--white);font-size:14px;line-height:1.55}
+    .offer-options li{padding:10px 0;border-top:1px solid var(--line)}
+    .offer-inquiry{margin-top:auto;display:inline-flex;align-items:center;min-height:48px;padding:8px 0;border:0;border-bottom:1px solid var(--gold);background:none;color:var(--gold);font:700 13px/1.4 Arial,Helvetica,sans-serif;text-align:left;cursor:pointer}
+    .offer-inquiry:hover{text-decoration:underline;text-underline-offset:4px}
+    .offer-inquiry:focus-visible{outline:2px solid currentColor;outline-offset:5px}
     .catalogue-note{margin:26px 0 0;color:var(--grey);font-size:14px;line-height:1.6}
     .coffee-section{background:var(--silver);color:var(--black);border-color:var(--silver)}
     .coffee-section .micro,.coffee-section .service-description,.coffee-section .catalogue-note{color:#333}
     .coffee-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #777;border-bottom:1px solid #777}
-    .coffee-list a{display:flex;align-items:center;min-height:100px;padding:20px;border-right:1px solid #777;font-size:clamp(18px,2.4vw,30px);font-weight:700;letter-spacing:-.02em}
-    .coffee-list a:last-child{border-right:0}
-    .coffee-list a:hover{background:var(--gold)}
+    .coffee-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:30px 24px;border-right:1px solid #777}
+    .coffee-card:last-child{border-right:0}
+    .coffee-card .micro{margin:0 0 18px;font-size:10px;letter-spacing:.1em}
+    .coffee-card h3{font-size:clamp(23px,2.4vw,34px);line-height:1.05;letter-spacing:-.025em}
+    .coffee-card p{margin:22px 0 26px;font-size:16px;line-height:1.6;color:#333}
+    .coffee-card .offer-inquiry{color:var(--black);border-color:var(--black)}
+    .contact-form input[readonly]{background:#eeede9;color:#333}
     .coffee-section .service-action{color:var(--black);border-color:var(--black)}
     .coffee-section .service-action:hover{background:var(--black);color:var(--white)}
     .menus-view{min-height:calc(100svh - 82px);background:var(--charcoal)}
@@ -291,8 +298,8 @@
     .menus-empty p{font-size:16px;line-height:1.65;color:var(--grey);margin:18px 0 0}
     .menus-upcoming{font-size:20px;line-height:1.3;letter-spacing:0;margin:38px 0 20px}
     .local-menu-admin{display:inline-flex;min-height:44px;align-items:center;margin-top:28px;color:var(--grey);font-size:13px;text-decoration:underline;text-underline-offset:4px}
-    @media(max-width:1050px){.top .nav{gap:18px;font-size:12px}.lunch-card,.offer-card{padding:28px 24px}.service-heading{gap:4vw}.coffee-list a{padding:20px 15px}}
-    @media(max-width:850px){.top{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:auto;min-height:116px;padding:12px 20px 0;gap:6px 12px}.top>a{grid-column:1/4;grid-row:1;justify-self:start}.top .nav{display:contents}.nav .contact-button{grid-column:4;grid-row:1;justify-self:end}.nav a{display:flex;grid-row:2;border-top:1px solid var(--line)}.service-heading{grid-template-columns:minmax(0,1fr);gap:26px}.lunch-layout{grid-template-columns:minmax(0,1fr)}.offer-grid{grid-template-columns:minmax(0,1fr)}.offer-card{min-height:0}.offer-card .num{margin-bottom:22px}.coffee-list{grid-template-columns:repeat(2,minmax(0,1fr))}.coffee-list a:nth-child(2){border-right:0}.coffee-list a:nth-child(-n+2){border-bottom:1px solid #777}.catalogue-strip{align-items:flex-start;flex-direction:column}}
+    @media(max-width:1050px){.top .nav{gap:18px;font-size:12px}.lunch-card,.offer-card{padding:28px 24px}.service-heading{gap:4vw}.coffee-list{grid-template-columns:repeat(2,minmax(0,1fr))}.coffee-card:nth-child(2){border-right:0}.coffee-card:nth-child(-n+2){border-bottom:1px solid #777}}
+    @media(max-width:850px){.top{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:auto;min-height:116px;padding:12px 20px 0;gap:6px 12px}.top>a{grid-column:1/4;grid-row:1;justify-self:start}.top .nav{display:contents}.nav .contact-button{grid-column:4;grid-row:1;justify-self:end}.nav a{display:flex;grid-row:2;border-top:1px solid var(--line)}.service-heading{grid-template-columns:minmax(0,1fr);gap:26px}.lunch-layout{grid-template-columns:minmax(0,1fr)}.offer-grid{grid-template-columns:minmax(0,1fr)}.offer-card{min-height:0}.offer-card .num{margin-bottom:22px}.catalogue-strip{align-items:flex-start;flex-direction:column}}
     @media(max-width:700px){
       .top{grid-template-columns:repeat(4,minmax(0,1fr));min-height:116px}
       .top>a{grid-column:1/4}
@@ -311,7 +318,11 @@
       .catalogue-strip{padding:28px 20px 34px}
       .catalogue-strip .service-action{width:100%}
       .offer-card h3{font-size:34px}
-      .coffee-list a{font-size:19px;min-height:88px;padding:20px 12px}
+      .coffee-list{grid-template-columns:minmax(0,1fr)}
+      .coffee-card{padding:28px 0;border-right:0;border-bottom:1px solid #777}
+      .coffee-card:last-child{border-bottom:0}
+      .coffee-card h3{font-size:30px}
+      .coffee-card p{max-width:420px;margin:16px 0 18px}
       .section-links{margin-top:24px;gap:12px 20px;font-size:12px}
       .menus-section{padding-top:30px}
       .weekly-menu-entry{grid-template-columns:minmax(0,1fr);padding:24px 0}
@@ -325,16 +336,16 @@
   </style>
 </head>
 <body>
-  <header class="top"><a href="#uvod"><img class="logo" src="assets/klobys-2fda597ffed83caa.webp" alt="Klobys"></a><nav class="nav" aria-label="Hlavní navigace"><a href="#jidelna">Jídelna</a><a href="#catering">Catering</a><a href="#pujcovna">Půjčovna</a><a href="#kafe">Kafe</a><button class="contact-button" data-contact>Kontakt</button></nav></header>
+  <header class="top"><a href="#uvod"><img class="logo" src="assets/klobys-2fda597ffed83caa.webp" alt="Klobys"></a><nav class="nav" aria-label="Hlavní navigace"><a href="#catering">Catering</a><a href="#jidelna">Jídelna</a><a href="#pujcovna">Půjčovna</a><a href="#kafe">Kafe</a><button class="contact-button" data-contact>Kontakt</button></nav></header>
   <main>
     <div id="home-view">
-    <section class="hero" id="uvod"><div class="hero-copy"><div><p class="micro">Catering / Jídelna / Vývařovna</p><h1>Dobré<br><span class="outline">jídlo.</span><br>Bez řečí.</h1></div><div class="hero-bottom"><p>Obědy pro váš tým i jídlo na velkou oslavu. Jsme Klobys — postaráme se o kuchyni, servis i vybavení.</p><button class="round" data-contact data-service="Catering">Poptat<br>termín</button></div></div><div class="hero-photo"><img id="hero-image" src="assets/klobys-2517819052e50ca0.webp" alt="Catering Klobys"></div></section>
+    <section class="hero" id="uvod"><div class="hero-copy"><div><p class="micro">Catering pro svatby, oslavy a firmy</p><h1>Dobré<br><span class="outline">jídlo.</span><br>Bez řečí.</h1></div><div class="hero-bottom"><p>Váš den, naše kuchyně. Připravíme catering na svatbu, oslavu i firemní akci — od menu po servis. Jsme Klobys.</p><button class="round" data-contact data-service="Catering">Poptat<br>catering</button></div></div><div class="hero-photo"><img id="hero-image" src="assets/klobys-2517819052e50ca0.webp" alt="Catering Klobys"></div></section>
     <div class="crawl" aria-label="Kliknutím otevřete poptávku"><div class="crawl-track"><span class="crawl-copy"><button data-contact data-service="Catering">Catering</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Firemní stravování">Firemní stravování</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Catering">Svatby</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Catering">Oslavy</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Firemní akce">Firemní akce</button> <b class="crawl-divider" aria-hidden="true"></b></span><span class="crawl-copy" aria-hidden="true"><button data-contact data-service="Catering" tabindex="-1">Catering</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Firemní stravování" tabindex="-1">Firemní stravování</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Catering" tabindex="-1">Svatby</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Catering" tabindex="-1">Oslavy</button> <b class="crawl-divider" aria-hidden="true"></b> <button data-contact data-service="Firemní akce" tabindex="-1">Firemní akce</button> <b class="crawl-divider" aria-hidden="true"></b></span></div></div>
-    <section class="intro" id="tym"><p class="micro">Tohle jsme my</p><div class="intro-copy"><p>Jídlo má chutnat. Servis má fungovat. A vy máte mít čas na své lidi.</p><small>Jsme tým Klobys. Na jednom místě spojujeme catering na svatby, oslavy a firemní akce, jídelnu a vývařovnu pro každodenní stravování. K tomu u nás najdete vybavení k zapůjčení a naši kávu. Společně vymyslíme, co dává smysl právě vám.</small><div class="section-links"><a href="#galerie">Naše práce v galerii</a><a href="#mista">Kde nás potkáte</a></div></div></section>
+    <section class="intro" id="tym"><p class="micro">Tohle jsme my</p><div class="intro-copy"><p>Jídlo má chutnat. Servis má fungovat. A vy máte mít čas na své lidi.</p><small>Jsme tým Klobys a catering je to, kolem čeho se u nás všechno točí. Připravujeme jídlo na svatby, oslavy i firemní akce. Vybavení si u nás můžete také půjčit samostatně a vybrat si z naší kávy. O každodenní obědy se stará jídelna a vývařovna. Společně vymyslíme, co dává smysl právě vám.</small><div class="section-links"><a href="#catering">Naše cateringová nabídka</a><a href="#galerie">Naše práce v galerii</a><a href="#mista">Kde nás potkáte</a></div></div></section>
     <section id="catering" aria-labelledby="catering-title">
       <div class="catering-heading"><div class="service-heading"><div><p class="micro">01 / Catering — nabídka</p><h2 id="catering-title">Váš den.<br>Naše kuchyně.</h2></div><p class="service-description">Od občerstvení na poradu po svatební hostinu. Menu a servis připravíme podle vaší akce, počtu hostů a toho, co máte rádi.</p></div></div>
       <div class="menu" id="nabidka"><article class="menu-row"><span class="num">01</span><h3><button data-contact data-service="Svatba">Svatby</button></h3><p>Od přípitku po půlnoční občerstvení. Menu i servis drží rytmus vašeho dne.</p></article><article class="menu-row"><span class="num">02</span><h3><button data-contact data-service="Oslava">Oslavy</button></h3><p>Zahrada, sál nebo obývák. Připravíme jídlo, kolem kterého se lidé rádi sejdou.</p></article><article class="menu-row corporate"><span class="num">03</span><h3><button data-contact data-service="Firemní akce">Firemní<br>akce</button></h3><p>Pracovní snídaně, setkání s klienty i večírek pro celý tým. Jídlo a servis přizpůsobíme vašemu programu.</p><button class="corporate-link" data-contact data-service="Firemní akce">Poptat firemní akci</button></article></div>
-      <div class="catalogue-strip"><p><strong>Občerstvení, které si vyberete sami.</strong><br>Slané a smažené boxy, kanapky i saláty najdete v naší nabídce. Boxy je potřeba objednat a zaplatit alespoň 48 hodin před vyzvednutím.</p><a class="service-action" href="https://www.klobys.cz/tapas-box/" target="_blank" rel="noopener">Prohlédnout boxy a občerstvení</a></div>
+      <div class="catalogue-strip"><p><strong>Malé občerstvení. Velká hostina.</strong><br>Slané a smažené boxy, kanapky i saláty. Napište nám, co plánujete, pro kolik hostů a na kdy. Připravíme nabídku podle vaší akce.</p><button class="service-action" data-contact data-service="Catering" data-offer="Boxy a občerstvení">Domluvit občerstvení</button></div>
     </section>
     <section class="visual"><img id="buffet-image" src="assets/klobys-36b9475f51d02168.webp" alt="Rautové občerstvení Klobys"><div class="statement"><blockquote>„Na stole má být radost. Ne nuda.“</blockquote><p>Čerstvé suroviny, poctivá kuchyně a detaily, které z obyčejného občerstvení udělají součást celé akce.</p></div></section>
     <section class="service-section" id="jidelna" aria-labelledby="lunch-title">
@@ -345,13 +356,22 @@
       </div>
     </section>
     <section class="service-section" id="pujcovna" aria-labelledby="rental-title">
-      <div class="service-heading"><div><p class="micro">03 / Půjčovna — nabídka</p><h2 id="rental-title">Od talíře<br>po celý stan.</h2></div><p class="service-description">Nemusíte všechno kupovat pro jednu akci. Vyberte si inventář, mobiliář nebo vybavení pro bar a raut. Dostupnost pro váš termín potvrdíme při objednávce.</p></div>
-      <div class="offer-grid"><article class="offer-card"><span class="num">01</span><h3>Inventář</h3><p>Porcelán, sklo a příbory. Vybavení pro prostřenou tabuli i menší setkání.</p><a href="https://www.klobys.cz/inventar/" target="_blank" rel="noopener">Vybrat inventář</a></article><article class="offer-card"><span class="num">02</span><h3>Mobiliář</h3><p>Párty stany, stoly, pivní sety i grily pro zahradní oslavy a větší akce.</p><a href="https://www.klobys.cz/mobiliar/" target="_blank" rel="noopener">Vybrat mobiliář</a></article><article class="offer-card"><span class="num">03</span><h3>Gastro a bar</h3><p>Výčepní zařízení, kávovary, tácy, podnosy a vybavení na bufet.</p><a href="https://www.klobys.cz/restauracni-a-barove-vybaveni/" target="_blank" rel="noopener">Vybrat gastro vybavení</a></article></div>
-      <div class="service-actions"><button class="service-action" data-contact data-service="Půjčovna">Poradit s vybavením</button></div><p class="catalogue-note">Kompletní nabídku, ceny a podmínky zapůjčení najdete v našem e-shopu. Termín a dostupnost vám potvrdíme osobně.</p>
+      <div class="service-heading"><div><p class="micro">03 / Půjčovna — nabídka</p><h2 id="rental-title">Od talíře<br>po celý stan.</h2></div><p class="service-description">Nemusíte všechno kupovat pro jednu akci. Inventář, mobiliář a gastro vybavení vám půjčíme k našemu cateringu i samostatně. Vyberte si, co potřebujete, a zbytek domluvíme osobně.</p></div>
+      <div class="offer-grid">
+        <article class="offer-card"><span class="num">01 / Na stůl</span><h3>Inventář</h3><p>Všechno, co patří k prostřené tabuli. Pro komorní večeři i velkou hostinu.</p><ul class="offer-options"><li>Porcelán — talíře a kávové šálky</li><li>Sklo — víno, sekt a long drink</li><li>Příbory — jídelní i steakové</li></ul><button class="offer-inquiry" data-contact data-service="Půjčovna" data-offer="Inventář — porcelán, sklo a příbory">Poptat inventář</button></article>
+        <article class="offer-card"><span class="num">02 / Prostor pro hosty</span><h3>Mobiliář</h3><p>Posezení a zázemí pro zahradní oslavu, svatbu i firemní setkání.</p><ul class="offer-options"><li>Párty stany</li><li>Bistro stolky a pivní sety</li><li>Plynové grily a grily na kýtu</li></ul><button class="offer-inquiry" data-contact data-service="Půjčovna" data-offer="Mobiliář — stany, stoly a grily">Poptat mobiliář</button></article>
+        <article class="offer-card"><span class="num">03 / Za barem a u rautu</span><h3>Gastro a bar</h3><p>Vybavení pro nápoje, servírování i udržení teplého jídla.</p><ul class="offer-options"><li>Výčepní zařízení a kávovary</li><li>Chafingy a ohřevné desky</li><li>Tácy, podnosy a etažéry</li></ul><button class="offer-inquiry" data-contact data-service="Půjčovna" data-offer="Gastro a bar — nápoje, ohřev a servírování">Poptat gastro vybavení</button></article>
+      </div>
+      <div class="service-actions"><button class="service-action" data-contact data-service="Půjčovna">Pomoci s výběrem vybavení</button></div><p class="catalogue-note">Do poptávky napište vybavení, počet kusů a termín. Dostupnost potvrdíme podle data vaší akce; cenu zapůjčení a případnou dopravu domluvíme v nabídce. Poptávka není závazná rezervace.</p>
     </section>
     <section class="service-section coffee-section" id="kafe" aria-labelledby="coffee-title">
-      <div class="service-heading"><div><p class="micro">04 / Kloby’s coffee</p><h2 id="coffee-title">A pak<br>dobré kafe.</h2></div><p class="service-description">Naše káva patří k posezení i k chvíli pro sebe. Vyberte si Kloby’s Blend nebo zrnkovou kávu Brazil, Columbia a Guatemala.</p></div>
-      <div class="coffee-list"><a href="https://www.klobys.cz/klobys-coffee/" target="_blank" rel="noopener">Kloby’s Blend</a><a href="https://www.klobys.cz/klobys-coffee/" target="_blank" rel="noopener">Brazil</a><a href="https://www.klobys.cz/klobys-coffee/" target="_blank" rel="noopener">Columbia</a><a href="https://www.klobys.cz/klobys-coffee/" target="_blank" rel="noopener">Guatemala</a></div><div class="service-actions"><a class="service-action" href="https://www.klobys.cz/klobys-coffee/" target="_blank" rel="noopener">Vybrat kávu v e-shopu</a><button class="service-action" data-contact data-service="Kafe">Zeptat se na kávu</button></div>
+      <div class="service-heading"><div><p class="micro">04 / Kloby’s coffee</p><h2 id="coffee-title">A pak<br>dobré kafe.</h2></div><p class="service-description">Čokoládové, oříškové nebo ovocné tóny? Poznejte naši nabídku zrnkové kávy. S výběrem i dostupným balením vám rádi poradíme.</p></div>
+      <div class="coffee-list">
+        <article class="coffee-card"><span class="micro">Tmavé pražení</span><h3>Kloby’s Blend</h3><p>Hořká čokoláda, lískové ořechy a citrusy. Do pákového i automatického kávovaru.</p><button class="offer-inquiry" data-contact data-service="Kafe" data-offer="Kloby’s Blend">Poptat Kloby’s Blend</button></article>
+        <article class="coffee-card"><span class="micro">Tmavé pražení</span><h3>Brazil</h3><p>Hořká čokoláda a lískové oříšky. Výrazná káva pro vaše espresso.</p><button class="offer-inquiry" data-contact data-service="Kafe" data-offer="Brazil — zrnková káva">Poptat Brazil</button></article>
+        <article class="coffee-card"><span class="micro">Tmavé pražení</span><h3>Columbia</h3><p>Čokoláda, lesní ovoce a třešně. Ovocné tóny v šálku espressa.</p><button class="offer-inquiry" data-contact data-service="Kafe" data-offer="Columbia — zrnková káva">Poptat Columbia</button></article>
+        <article class="coffee-card"><span class="micro">Střední pražení</span><h3>Guatemala</h3><p>Pralinky a lesní plody. Jemnější pražení pro chvíli s dobrým espressem.</p><button class="offer-inquiry" data-contact data-service="Kafe" data-offer="Guatemala — zrnková káva">Poptat Guatemala</button></article>
+      </div><div class="service-actions"><button class="service-action" data-contact data-service="Kafe">Poradit s výběrem kávy</button></div><p class="catalogue-note">Bez košíku a bez platby na webu. Napište, která káva vás zajímá a v jakém množství. Aktuální cenu a možnosti odběru vám potvrdíme osobně.</p>
     </section>
     <section class="gallery" id="galerie" aria-labelledby="gallery-title"><div class="gallery-head"><div><p class="micro">Z našeho Instagramu</p><h2 id="gallery-title">Ochutnejte<br>očima.</h2></div><div class="socials"><a class="social-link" href="https://www.instagram.com/klobyscatering/" target="_blank" rel="noopener" aria-label="Klobys Catering na Instagramu"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Catering</span></a><a class="social-link" href="https://www.instagram.com/klobysrestaurant/" target="_blank" rel="noopener" aria-label="Klobys Restaurant na Instagramu"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Restaurant</span></a><a class="social-link" href="https://www.facebook.com/klobysrestaurant/" target="_blank" rel="noopener" aria-label="Klobys na Facebooku"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.7 22v-9.1h3.1l.5-3.6h-3.6V7c0-1 .3-1.8 1.8-1.8h1.9V2a24 24 0 0 0-2.8-.2c-2.8 0-4.7 1.7-4.7 4.9v2.6H6.8v3.6h3.1V22z"/></svg><span>Facebook</span></a></div></div><div class="gallery-grid">
       <a class="gallery-item" href="https://www.instagram.com/klobyscatering/p/DAF3WILoic9/" target="_blank" rel="noopener" aria-label="Rautové prkénko — otevřít příspěvek na Instagramu"><img src="assets/klobys-150b9f35da58daba.webp" alt="Rautové prkénko Klobys" width="600" height="600" loading="lazy"><span class="gallery-caption"><span>Rautové prkénko</span></span></a>
@@ -361,7 +381,7 @@
       <a class="gallery-item" href="https://www.instagram.com/klobysrestaurant/p/C8SZLOboVRS/" target="_blank" rel="noopener" aria-label="Na talíři — otevřít příspěvek na Instagramu"><img src="assets/klobys-b7bfed2f01777708.webp" alt="Na talíři Klobys" width="600" height="600" loading="lazy"><span class="gallery-caption"><span>Na talíři</span></span></a>
       <a class="gallery-item" href="https://www.instagram.com/klobyscatering/p/C_Q5deNI_Rg/" target="_blank" rel="noopener" aria-label="Raut na míru — otevřít příspěvek na Instagramu"><img src="assets/klobys-e5d2681fed06afb4.webp" alt="Raut na míru Klobys" width="600" height="600" loading="lazy"><span class="gallery-caption"><span>Raut na míru</span></span></a>
     </div><p class="gallery-more">Další fotografie a novinky najdete na našich sociálních sítích.</p></section>
-    <section class="places" id="mista"><div class="places-head"><div><p class="micro">Kde nás potkáte</p><h2>Dvě místa.<br>Jedna chuť.</h2></div><button class="facebook plain" data-contact>Poptat catering </button></div><div class="place-list"><a class="place" href="https://maps.app.goo.gl/ad1YbYo1N8wA7Myk6" target="_blank" rel="noopener"><span>01</span><div><h3>Klobys Restaurant</h3><p>Kostelec nad Labem</p></div></a><a class="place" href="https://maps.app.goo.gl/D59B5hPMN9rQetSK6" target="_blank" rel="noopener"><span>02</span><div><h3>Kemp u Kačera</h3><p>Jezero Křenek</p></div></a></div></section>
+    <section class="places" id="mista"><div class="places-head"><div><p class="micro">Kde nás potkáte</p><h2>Dvě místa.<br>Jedna chuť.</h2></div><button class="facebook plain" data-contact data-service="Catering">Poptat catering</button></div><div class="place-list"><a class="place" href="https://maps.app.goo.gl/ad1YbYo1N8wA7Myk6" target="_blank" rel="noopener"><span>01</span><div><h3>Klobys Restaurant</h3><p>Kostelec nad Labem</p></div></a><a class="place" href="https://maps.app.goo.gl/D59B5hPMN9rQetSK6" target="_blank" rel="noopener"><span>02</span><div><h3>Kemp u Kačera</h3><p>Jezero Křenek</p></div></a></div></section>
     </div>
     <div class="menus-view" id="menus-view" hidden>
       <nav class="contact-back" aria-label="Návrat z jídelních lístků"><a href="#jidelna" id="menus-back">Vrátit se zpět</a></nav>
@@ -380,6 +400,7 @@
       <form class="contact-form" id="inquiry-form">
         <label for="inquiry-name">Jméno a příjmení *<input id="inquiry-name" name="name" autocomplete="name" required maxlength="120"></label>
         <label for="inquiry-service">Co pro vás připravíme? *<select id="inquiry-service" name="service" required><option value="">Vyberte službu</option><option>Catering</option><option>Svatba</option><option>Oslava</option><option>Firemní akce</option><option>Firemní stravování</option><option>Jídelna</option><option>Půjčovna</option><option>Kafe</option><option>Jiná akce</option></select></label>
+        <label class="full" id="inquiry-selection-label" for="inquiry-selection" hidden>Vybraná nabídka<input id="inquiry-selection" name="selection" readonly disabled maxlength="160"></label>
         <label for="inquiry-email">E-mail *<input id="inquiry-email" name="email" type="email" autocomplete="email" required maxlength="180"></label>
         <label for="inquiry-phone">Telefon *<input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" required maxlength="40"></label>
         <label for="inquiry-guests"><span id="guests-label">Počet osob *</span><input id="inquiry-guests" name="guests" type="number" min="1" step="1" inputmode="numeric" required></label>
@@ -399,7 +420,7 @@
   </main>
   <footer class="bottom"><img class="logo" src="assets/klobys-2fda597ffed83caa.webp" alt="Klobys"><div class="bottom-contact"><a href="tel:+420733752513">733 752 513</a><br><a href="mailto:info@klobys.cz">info@klobys.cz</a></div><div class="bottom-right"><div class="socials"><a class="social-link" href="https://www.instagram.com/klobyscatering/" target="_blank" rel="noopener" aria-label="Klobys Catering na Instagramu"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Catering</span></a><a class="social-link" href="https://www.instagram.com/klobysrestaurant/" target="_blank" rel="noopener" aria-label="Klobys Restaurant na Instagramu"><svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Restaurant</span></a><a class="social-link" href="https://www.facebook.com/klobysrestaurant/" target="_blank" rel="noopener" aria-label="Klobys na Facebooku"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.7 22v-9.1h3.1l.5-3.6h-3.6V7c0-1 .3-1.8 1.8-1.8h1.9V2a24 24 0 0 0-2.8-.2c-2.8 0-4.7 1.7-4.7 4.9v2.6H6.8v3.6h3.1V22z"/></svg><span>Facebook</span></a></div><div class="footer-meta">© Klobys · <a href="https://www.klobys.cz/obchodni-podminky/" target="_blank" rel="noopener">Obchodní podmínky</a> · <a href="#uvod">Zpět nahoru</a></div></div></footer>
   <script>
-    const embeddedMenus=[];
+    const embeddedMenus=[{"id":"github-1","title":"Ukázkový jídelní lístek","from":"2026-10-02","to":"2026-10-09","notes":"Ilustrační nabídka pro představení webu. Nejde o aktuální menu ani závazný ceník. Nabídku může správce průběžně upravovat a přiložit vlastní PDF nebo fotku.","items":[{"name":"Hovězí vývar s domácími nudlemi"},{"name":"Kuřecí řízek, bramborová kaše"},{"name":"Pomalu pečená vepřová krkovice, šťouchané brambory"},{"name":"Krémové houbové rizoto, parmazán"}],"attachment":{"name":"klobys-ukazkovy-jidelni-listek.pdf","type":"application/pdf","url":"https://github.com/user-attachments/files/32982701/klobys-ukazkovy-jidelni-listek.pdf"},"demo":true,"active":true,"issueUrl":"https://github.com/stepanmartinek181-maker/klobys-catering/issues/1","updatedAt":"2026-10-02T22:09:03.000Z"}];
     const menuContainer=document.getElementById('weekly-menus');
     const menuDownloads=[];
     const menuDate=value=>new Date(`${value}T12:00:00`).toLocaleDateString('cs-CZ');
@@ -508,16 +529,21 @@
     refreshMenus();
     const form=document.getElementById('inquiry-form');
     const corporateFields=document.getElementById('corporate-fields');
+    const selectionLabel=document.getElementById('inquiry-selection-label');
+    let selectionService='';
     const updateInquiry=()=>{
       const service=form.elements.service.value;
+      if(service!==selectionService)form.elements.selection.value='';
+      selectionLabel.hidden=!form.elements.selection.value;
+      form.elements.selection.disabled=selectionLabel.hidden;
       const corporate=service==='Firemní stravování';
       const informal=['Jídelna','Půjčovna','Kafe'].includes(service);
       corporateFields.hidden=!corporate;
       corporateFields.disabled=!corporate;
       form.elements.guests.required=!informal;
       document.getElementById('guests-label').textContent=corporate?'Počet strávníků *':(informal?'Počet osob (volitelné)':'Počet osob *');
-      document.getElementById('date-label').textContent=corporate?'Od kdy chcete začít?':'Datum konání / začátku';
-      form.elements.message.placeholder=corporate?'Napište přibližný čas obědů, preferované dny a případné požadavky na menu.':(service==='Půjčovna'?'Napište, jaké vybavení potřebujete a na jaký termín.':(service==='Jídelna'?'Napište, na který den vás zajímá menu nebo jaké máte požadavky.':(service==='Kafe'?'S čím vám můžeme poradit při výběru kávy?':'')));
+      document.getElementById('date-label').textContent=corporate?'Od kdy chcete začít?':(service==='Půjčovna'?'Termín zapůjčení':(service==='Kafe'?'Požadovaný termín (volitelné)':'Datum konání / začátku'));
+      form.elements.message.placeholder=corporate?'Napište přibližný čas obědů, preferované dny a případné požadavky na menu.':(service==='Půjčovna'?'Napište konkrétní vybavení, počet kusů a dobu zapůjčení.':(service==='Jídelna'?'Napište, na který den vás zajímá menu nebo jaké máte požadavky.':(service==='Kafe'?'Napište, kterou kávu chcete, přibližné množství nebo s čím potřebujete poradit.':'')));
       form.querySelector('.form-status').textContent='';
     };
     form.elements.service.addEventListener('change',updateInquiry);
@@ -558,6 +584,8 @@
     };
     document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',()=>{
       if(button.dataset.service)form.elements.service.value=button.dataset.service;
+      form.elements.selection.value=button.dataset.offer||'';
+      selectionService=form.elements.service.value;
       updateInquiry();
       if(currentView==='contact')return;
       returnFocus=button;
@@ -604,6 +632,7 @@
         `${corporate?'Počet strávníků':'Počet osob'}: ${data.get('guests')||'neuvedeno'}`,
         `${corporate?'Začátek stravování':'Datum'}: ${date}`
       ];
+      if(data.get('selection'))lines.push(`Vybraná nabídka: ${data.get('selection')}`);
       if(corporate)lines.push(`Firma: ${data.get('company')||'neuvedeno'}`,`Četnost: ${data.get('frequency')||'dle domluvy'}`);
       lines.push('',`Zpráva: ${data.get('message')||'—'}`);
       form.querySelector('.form-status').textContent='Otevírám e-mail s vaší poptávkou…';
