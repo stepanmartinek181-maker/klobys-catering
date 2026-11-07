@@ -29,9 +29,12 @@ Návštěvník přidává položky z cateringu, půjčovny i kávy do jedné nez
 poptávky. Výběr se uchovává v prohlížeči; na kontaktu lze upravit množství
 nebo odebrat položky. Web nemá platby ani závazné objednávky. Cenu, dostupnost,
 velikost cateringové sestavy a podmínky zapůjčení potvrzuje tým osobně.
-Po výběru služby „Půjčovna“ lze všech 54 položek hledat a přidávat i přímo
-v kontaktním formuláři, bez odchodu na katalog. Hledání funguje bez diakritiky,
-má filtr kategorií a výsledky zobrazuje po šesti. Výběr se sdílí s katalogem.
+Po výběru Cateringu (15 položek), Půjčovny (54) nebo Kafe (4 kávy a 1 doplněk)
+lze odpovídající nabídku hledat a přidávat i přímo v kontaktním formuláři,
+bez odchodu na katalog. Hledání funguje bez diakritiky, má vlastní filtry
+kategorií a výsledky zobrazuje po šesti. Výběr se sdílí s katalogem.
+U „Více služeb“ jsou dostupné všechny tři nabídky; svatby, oslavy a firemní
+akce zobrazují občerstvení cateringu. Svíčka Kafe zůstává oddělená od kávy.
 Nový zákaznický ceník zatím nebyl dodán; web neslibuje skladové počty ani
 časovou jednotku půjčovného. Na mobilu má káva větší jednosloupcové karty.
 
