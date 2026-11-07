@@ -6,7 +6,7 @@ Statický vícestránkový web, optimalizované fotografie ve složce `assets/`.
 GitHub Pages používá větev `main` a kořenovou složku `/`.
 
 Web představuje především catering a tým Klobys. Nabídka je rozdělená na
-Catering, Jídelnu, Půjčovnu a Kafe. Každá položka otevírá vlastní HTML stránku,
+Catering, Jídelnu, Půjčovnu a Kafe. Každá sekce má vlastní HTML stránku,
 nikoli sekci na úvodu. Samostatné stránky mají také Galerie, Kontakt a jídelní
 lístky. Kontakt vrací návštěvníka na stránku, odkud přišel; ostatní nabídky
 mají návrat na úvod. Rozvržení je přizpůsobené mobilům.
@@ -15,11 +15,22 @@ Stránky: `index.html`, `catering.html`, `jidelna.html`, `pujcovna.html`,
 `kafe.html`, `galerie.html`, `kontakt.html` a `jidelni-listky.html`.
 Původní odkazy na sekce přesměrují na odpovídající novou stránku.
 
-Půjčovna má nabídku inventáře, mobiliáře a gastro/barového vybavení.
-Kávové karty představují Kloby’s Blend, Brazil, Columbia a Guatemala.
-Nejde o e-shop: bez košíku a plateb, každá nabídka otevírá nezávaznou
-poptávku s předvyplněnou službou a vybranou položkou. Cenu a dostupnost
-potvrzuje tým osobně. Novější ceny a zákaznické fotografie zatím nebyly dodány.
+Půjčovna obsahuje 54 konkrétních položek: inventář (17), mobiliář (6)
+a restaurační/barové vybavení (31). Kategorie lze přepínat a položky hledat
+i bez diakritiky. Spotřební doplňky jsou označené odděleně od zapůjčovaného vybavení.
+Catering představuje svatby, oslavy a firemní akce a také 15 druhů občerstvení:
+smažené boxy (4), slané boxy (8), kanapky (2) a saláty (1).
+Kafe obsahuje Kloby’s Blend, Brazil, Columbia a Guatemala, jejich chuťové
+profily, pražení a nabídku balení 500 g / 1 kg. Svíčka Kafe je samostatný doplněk.
+Nabídka byla porovnána s veřejným katalogem klobys.cz 7. 10. 2026.
+Použito je 57 skutečných produktových fotografií, optimalizovaných a uložených
+přímo ve webu. Kde veřejný zdroj nemá fotografii, není doplněný falešný obrázek.
+Návštěvník přidává položky z cateringu, půjčovny i kávy do jedné nezávazné
+poptávky. Výběr se uchovává v prohlížeči; na kontaktu lze upravit množství
+nebo odebrat položky. Web nemá platby ani závazné objednávky. Cenu, dostupnost,
+velikost cateringové sestavy a podmínky zapůjčení potvrzuje tým osobně.
+Nový zákaznický ceník zatím nebyl dodán; web neslibuje skladové počty ani
+časovou jednotku půjčovného. Na mobilu má káva větší jednosloupcové karty.
 
 ## Jídelní lístky a jejich správa
 
@@ -51,5 +62,6 @@ Před další ruční aktualizací webu stáhněte aktuální `main` a zachovejt
 Testy parseru: `node --test .github/scripts/menu-parser.test.mjs`.
 
 Kontaktní formulář připraví poptávku v e-mailovém programu návštěvníka;
-neodesílá ji automaticky přes server. Galerie odkazuje na vybrané příspěvky
+neodesílá ji automaticky přes server. Delší poptávku lze zkopírovat v plném
+znění. Galerie odkazuje na vybrané příspěvky
 Instagramu a nenačítá automaticky nové příspěvky.
